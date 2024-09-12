@@ -83,6 +83,7 @@ const Jobs = () => {
   return (
     <div className="jobs-container">
       <button onClick={bookmark}>Bookmarks Page</button>
+      <h1>Welcome to Jobs Page </h1>
       {jobs.length > 0 ? (
         jobs
           .filter(job => job.title && job.primary_details?.Place && job.primary_details?.Salary) // Only show jobs with all required details
