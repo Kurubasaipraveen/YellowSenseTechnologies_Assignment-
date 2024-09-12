@@ -97,7 +97,7 @@ const Jobs = () => {
             </div>
           ))
       ) : (
-        <p>No jobs available.</p>
+        <p></p>
       )}
 
       {isLoading && <p>Loading more jobs...</p>}

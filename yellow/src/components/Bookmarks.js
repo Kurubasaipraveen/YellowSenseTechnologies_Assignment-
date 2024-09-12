@@ -10,6 +10,9 @@ const Bookmarks = () => {
   const jobs=()=>{
     navigate('/jobs')
   }
+  const Home=()=>{
+    navigate('/')
+  }
   useEffect(() => {
     const fetchBookmarkedJobs = async () => {
       setIsLoading(true);
@@ -41,6 +44,7 @@ const Bookmarks = () => {
   return (
     <div className="bookmarks-container">
       <button onClick={jobs}>Jobs</button>
+      <button onClick={Home}>Back To Home</button>
       <h1>Welcome To Bookmark</h1>
       {bookmarkedJobs.length > 0 ? (
         bookmarkedJobs.map((job) => (

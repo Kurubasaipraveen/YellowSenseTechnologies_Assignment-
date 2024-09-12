@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
 import '../styles/JobDetails.css';  // Import the CSS file
 
 const JobDetail = () => {
@@ -7,7 +7,10 @@ const JobDetail = () => {
   const [job, setJob] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const navigate=useNavigate();
+  const back=()=>{
+    navigate('/jobs')
+  }
   useEffect(() => {
     const fetchJobDetail = async () => {
       try {
@@ -57,7 +60,7 @@ const JobDetail = () => {
       <p><strong>Qualification:</strong> {job?.primary_details?.Qualification || 'N/A'}</p>
       <p><strong>Phone:</strong> {job?.whatsapp_no || 'N/A'}</p>
       <p><strong>Company:</strong> {job?.company_name || 'N/A'}</p>
-           
+      <button onClick={back}>Back</button>
     </div>
   );
 };
