@@ -9,6 +9,7 @@ const Jobs = () => {
   const [error, setError] = useState(null);
   const [hasMore, setHasMore] = useState(true);
   const navigate = useNavigate();
+  const jobIds = new Set(); 
 
   const fetchJobs = async () => {
     if (isLoading || !hasMore) return;
@@ -19,8 +20,16 @@ const Jobs = () => {
       const data = await response.json();
 
       if (Array.isArray(data.results)) {
-        setJobs(prevJobs => [...prevJobs, ...data.results]);
-        setHasMore(data.results.length > 0);
+        const newJobs = data.results.filter(job => {
+          if (jobIds.has(job.id)) {
+            return false; // Skip if job ID is already in the Set
+          }
+          jobIds.add(job.id); // Add job ID to the Set
+          return true;
+        });
+
+        setJobs(prevJobs => [...prevJobs, ...newJobs]);
+        setHasMore(newJobs.length > 0);
       } else {
         throw new Error('Jobs data is not in the expected format');
       }
