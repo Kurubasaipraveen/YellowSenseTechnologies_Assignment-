@@ -50,47 +50,47 @@ const Jobs = () => {
   const handleJobClick = (id) => {
     navigate(`/job/${id}`);
   };
-  const bookmark=()=>{
-    navigate('./bookmarks')
-  }
+
+  const bookmark = () => {
+    navigate('/bookmarks');
+  };
 
   const handleBookmarkClick = (job, e) => {
     e.stopPropagation();
     const bookmarkedJobs = JSON.parse(localStorage.getItem('bookmarkedJobs')) || [];
-    
     const isBookmarked = bookmarkedJobs.some(b => b.id === job.id);
-    
+
     if (isBookmarked) {
       alert('Job already bookmarked!');
       return;
     }
-    
+
     bookmarkedJobs.push(job);
     localStorage.setItem('bookmarkedJobs', JSON.stringify(bookmarkedJobs));
-    
+
     alert('Job bookmarked!');
   };
 
   return (
     <div className="jobs-container">
-      <button onClick={bookmark}>BookMarks Page</button>
+      <button onClick={bookmark}>Bookmarks Page</button>
       {jobs.length > 0 ? (
-        jobs.map((job) => (
-          <div key={job.id} className="job-card" onClick={() => handleJobClick(job.id)}>
-            <h2>{job.title}</h2>
-            <p><strong>Location:</strong> {job.primary_details?.Place || 'N/A'}</p>
-            <p><strong>Salary:</strong> {job.primary_details?.Salary || 'N/A'}</p>
-            <p><strong>Phone:</strong> {job.whatsapp_no || 'N/A'}</p>
-            <p><strong>Company:</strong> {job.company_name || 'N/A'}</p>
-            
-            <button onClick={(e) => handleBookmarkClick(job, e)}>
-              Bookmark
-            </button>
-          </div>
-        ))
+        jobs
+          .filter(job => job.title && job.primary_details?.Place && job.primary_details?.Salary) // Only show jobs with all required details
+          .map((job, index) => (
+            <div key={`${job.id}-${index}`} className="job-card" onClick={() => handleJobClick(job.id)}>
+              {job.title && <h2>{job.title}</h2>}
+              {job.primary_details?.Place && <p><strong>Location:</strong> {job.primary_details.Place}</p>}
+              {job.primary_details?.Salary && <p><strong>Salary:</strong> {job.primary_details.Salary}</p>}
+              {job.whatsapp_no && <p><strong>Phone:</strong> {job.whatsapp_no}</p>}
+              {job.company_name && <p><strong>Company:</strong> {job.company_name}</p>}
+              <button onClick={(e) => handleBookmarkClick(job, e)}>Bookmark</button>
+            </div>
+          ))
       ) : (
-        <p></p>
+        <p>No jobs available.</p>
       )}
+
       {isLoading && <p>Loading more jobs...</p>}
       {error && <p>{error}</p>}
       {!hasMore && !isLoading && <p>No more jobs to load.</p>}
