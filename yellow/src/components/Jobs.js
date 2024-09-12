@@ -56,11 +56,8 @@ const Jobs = () => {
 
   const handleBookmarkClick = (job, e) => {
     e.stopPropagation();
-    
-    // Retrieve bookmarked jobs from local storage
     const bookmarkedJobs = JSON.parse(localStorage.getItem('bookmarkedJobs')) || [];
     
-    // Check if the job is already bookmarked
     const isBookmarked = bookmarkedJobs.some(b => b.id === job.id);
     
     if (isBookmarked) {
@@ -68,7 +65,6 @@ const Jobs = () => {
       return;
     }
     
-    // Add new job to the list and update local storage
     bookmarkedJobs.push(job);
     localStorage.setItem('bookmarkedJobs', JSON.stringify(bookmarkedJobs));
     
