@@ -3,8 +3,15 @@ import { useSwipeable } from 'react-swipeable';
 
 const JobCard = ({ job, onBookmark, onDismiss }) => {
   const handlers = useSwipeable({
-    onSwipedLeft: () => onDismiss(job),
-    onSwipedRight: () => onBookmark(job),
+    onSwipedLeft: () => {
+      console.log('Left swipe detected');
+      onDismiss(job);
+    },
+    onSwipedRight: () => {
+      console.log('Right swipe detected');
+      onBookmark(job);
+    },
+    delta: 30, // Adjust swipe sensitivity here if needed
   });
 
   return (

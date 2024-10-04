@@ -38,11 +38,13 @@ const Jobs = () => {
   const handleBookmark = (job) => {
     setBookmarkedJobs((prev) => [...prev, job]);
     localStorage.setItem('bookmarkedJobs', JSON.stringify([...bookmarkedJobs, job]));
+    console.log('Bookmarked job:', job);
   };
 
   const handleDismiss = (job) => {
     setDismissedJobs((prev) => [...prev, job.id]);
     setJobs((prevJobs) => prevJobs.filter(j => j.id !== job.id));
+    console.log('Dismissed job:', job);
   };
 
   const handleScroll = () => {
@@ -52,7 +54,6 @@ const Jobs = () => {
     ) {
       return;
     }
-    // Only increment the page if there are more jobs to fetch
     setPage((prevPage) => prevPage + 1);
   };
 
