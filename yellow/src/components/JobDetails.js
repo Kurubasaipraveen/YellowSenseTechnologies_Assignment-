@@ -52,6 +52,7 @@ const JobDetail = () => {
   return (
     <div className="job-detail-container">
       <h1>{job?.title || 'Job title not available'}</h1>
+      <p><strong>Company:</strong> {job?.company_name || 'N/A'}</p>
       <p><strong>Location:</strong> {job?.primary_details?.Place || 'N/A'}</p>
       <p><strong>Salary:</strong> {job?.primary_details?.Salary || 'N/A'}</p>
       <p><strong>Job_Type:</strong> {job?.primary_details?.Job_Type || 'N/A'}</p>
@@ -59,7 +60,7 @@ const JobDetail = () => {
       <p><strong>Fees_Charged:</strong> {job?.primary_details?.Fees_Charged || 'N/A'}</p>
       <p><strong>Qualification:</strong> {job?.primary_details?.Qualification || 'N/A'}</p>
       <p><strong>Phone:</strong> {job?.whatsapp_no || 'N/A'}</p>
-      <p><strong>Company:</strong> {job?.company_name || 'N/A'}</p>
+      
       <button onClick={back}>Back</button>
     </div>
   );

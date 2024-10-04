@@ -69,7 +69,7 @@ const Jobs = () => {
           />
         ))
       ) : (
-        <p>No more jobs to display.</p>
+        <></>
       )}
       {loading && <p>Loading more jobs...</p>}
     </div>
