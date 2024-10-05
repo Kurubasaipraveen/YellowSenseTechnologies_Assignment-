@@ -1,19 +1,21 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Jobs from './components/Jobs';
-import JobDetails from './components/JobDetails';
 import Bookmarks from './components/Bookmarks';
-import Home from './components/Home'
-function App() {
+import JobDetail from './components/JobDetails'; // Import the JobDetail component
+import Home from './components/Home';
+
+const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path='/jobs' element={<Jobs/>}/>
-        <Route path="/job/:id" element={<JobDetails />} />
+        <Route path='/' element={<Home />} />
+        <Route path="/jobs" element={<Jobs />} />
         <Route path="/bookmarks" element={<Bookmarks />} />
+        <Route path="/job/:jobId" element={<JobDetail />} /> {/* Ensure this matches */}
       </Routes>
     </Router>
   );
-}
+};
 
 export default App;

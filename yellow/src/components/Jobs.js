@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import JobCard from './JobCard'; // Import the JobCard component
+import JobCard from './JobCard'; 
 import '../styles/Jobs.css';
 
 const Jobs = () => {
@@ -56,9 +56,11 @@ const Jobs = () => {
     }
     setPage((prevPage) => prevPage + 1);
   };
+  
 
   return (
-    <div className="job-list-container">
+    <div className="job-list-container" >
+      <button>BookMarks</button>
       {jobs.length > 0 ? (
         jobs.map((job, index) => (
           <JobCard
@@ -66,6 +68,7 @@ const Jobs = () => {
             job={job}
             onBookmark={handleBookmark}
             onDismiss={handleDismiss}
+            
           />
         ))
       ) : (
